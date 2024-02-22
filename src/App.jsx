@@ -1,29 +1,43 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-// import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 // import { getUser, logoutUser } from "./service/users";
 
-// import AuthPage from "./components/AuthPage/AuthPage";
+import AuthPage from "./pages/AuthPage/AuthPage";
+import MainPage from "./pages/MainPage/MainPage";
+
+// import UserPage from "./pages/UserPage/UserPage";
+// import EventPage from "./pages/EventPage/EventPage";
+// import SinglePostPage from "./pages/SinglePostPage/SinglePostPage";
+
+import NavBar from "./components/NavBar/NavBar";
+// import BackgroundPlate from "./components/BackgroundPlate/BackgroundPlate";
+import ParticlesBackground from "./components/ParticlesBackground/ParticlesBackground";
+
 // import LogInForm from "./components/LogInForm/LogInForm";
 // import SignUpForm from "./components/SignUpForm/SignUpForm";
-// import MainPage from "./components/MainPage/MainPage";
-// import NavBar from "./components/NavBar/NavBar";
 // import CreateReviewForm from "./components/CreateReviewForm/CreateReviewForm";
-// import UserPage from "./components/UserPage/UserPage";
+
 // import ViewReviewPage from "./components/ViewReviewPage/ViewReviewPage";
 // import UpdateReviewForm from "./components/CreateReviewForm/UpdateReviewForm";
 // import { getToken } from "./util/security";
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
+    <main className="App">
+      <ParticlesBackground />
+      <NavBar />
       <div>
-        TEST TEST TEST
+          {/* <AuthPage /> */}
+          <Routes>
+            <Route path="/" element={<MainPage />} />
+            {/* <Route path="/register" element={<SignUpForm />} /> */}
+            {/* <Route path="/login" element={<LogInForm setUser={setUser} setUserId={setUserId} />} /> */}
+          </Routes>
       </div>
-    </>
-  )
+    </main>
+  );
 }
 
 export default App
