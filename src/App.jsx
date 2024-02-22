@@ -14,8 +14,8 @@ import NavBar from "./components/NavBar/NavBar";
 // import BackgroundPlate from "./components/BackgroundPlate/BackgroundPlate";
 import ParticlesBackground from "./components/ParticlesBackground/ParticlesBackground";
 
-// import LogInForm from "./components/LogInForm/LogInForm";
-// import SignUpForm from "./components/SignUpForm/SignUpForm";
+import SignUpForm from "./components/SignUpForm/SignUpForm";
+import SignInForm from "./components/SignInForm/SignInForm";
 // import CreateReviewForm from "./components/CreateReviewForm/CreateReviewForm";
 
 // import ViewReviewPage from "./components/ViewReviewPage/ViewReviewPage";
@@ -32,8 +32,9 @@ function App() {
           {/* <AuthPage /> */}
           <Routes>
             <Route path="/" element={<MainPage />} />
-            {/* <Route path="/register" element={<SignUpForm />} /> */}
-            {/* <Route path="/login" element={<LogInForm setUser={setUser} setUserId={setUserId} />} /> */}
+            <Route path="/register" element={<SignUpForm />} />
+            {/* <Route path="/login" element={<SignInForm setUser={setUser} setUserId={setUserId} />} /> */}
+            <Route path="/login" element={<SignInForm />} />
           </Routes>
       </div>
     </main>
