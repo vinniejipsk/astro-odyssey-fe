@@ -1,45 +1,60 @@
 import React from 'react';
 import { Box, Card, Grid, Typography } from '@mui/material';
+import { Link } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
+import Button from '@mui/material/Button';
 
-export default function GuestInfo () {
+export default function GuestInfo() {
   return (
     <>
-    <Grid
-      sx={{
-        display: 'flex', // Use flexbox layout
-        flexDirection: 'column', // Stack children vertically
-        justifyContent: 'center', // Center vertically
-        alignItems: 'center', // Center horizontally
-        backgroundColor: 'rgba(104, 112, 124, 0.2)', // Set the background color to dark blue
+      <Grid container sx={{
+        backgroundColor: 'rgba(104, 112, 124, 0.2)', // Set the background color
         color: 'white', // Set the text color to white for better contrast
-        padding: '3vh',
-      }}
-    >
-      <Typography sx={{ fontSize: '16px', textAlign: 'center', mt: '10px', mb: '10px', maxWidth: '50%' }} component="p">
-        This website is a portal for astronomy enthusiasts to explore the night sky. 
-      </Typography>
-      <Typography sx={{ fontSize: '16px', textAlign: 'center', mt: '10px', mb: '10px', maxWidth: '50%' }} component="p">
-        Discover educational content on celestial phenomena, plan your observations and personalize your experience through a user profile. 
-      </Typography>
-      <Typography sx={{ fontSize: '16px', textAlign: 'center', mt: '10px', mb: '10px', maxWidth: '50%' }} component="p">
-        Whether you're a beginner or an experienced stargazer, find everything needed to embark on your astronomical journey.
-      </Typography>
-    </Grid>
-    <Grid
-      sx={{
-        display: 'flex', // Use flexbox layout
-        flexDirection: 'column', // Stack children vertically
-        justifyContent: 'center', // Center vertically
-        alignItems: 'center', // Center horizontally
+        padding: '5vh',
+        justifyContent: 'center', // Center the items horizontally
+      }}>
+        {/* Left-aligned Typography */}
+        <Grid item xs={12} md={5} sx={{ display: 'flex', justifyContent: 'flex-start' }}>
+          <Typography sx={{ fontSize: '16px', textAlign: 'center', mt: '10px', mb: '10px', maxWidth: '50%' }}>
+            This website is a portal for astronomy enthusiasts to explore the night sky. Family and friends are welcome.
+          </Typography>
+        </Grid>
+
+        {/* Right-aligned Typography */}
+        <Grid item xs={12} md={5} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <Typography sx={{ fontSize: '16px', textAlign: 'center', mt: '10px', mb: '10px', maxWidth: '50%' }}>
+            Whether you're a beginner or an experienced stargazer, find everything needed to embark on your astronomical journey.
+          </Typography>
+        </Grid>
+      </Grid>
+
+      <Grid container sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
         backgroundColor: 'rgba(104, 112, 124, 0.2)', // Set the background color to dark blue
         color: 'white', // Set the text color to white for better contrast
         marginTop: '5vh',
-      }}
-    >
-      <Typography sx={{ fontSize: '16px', textAlign: 'center', mt: '30px', mb: '30px', maxWidth: '25%' }} component="p">
-        Sign up to check the latest astronomical stories and book your observations.
-      </Typography>
-    </Grid>
+      }}>
+        <Typography sx={{ fontSize: '16px', textAlign: 'center', mt: '30px', mb: '20px', maxWidth: '25%' }} component="p">
+          Sign up to check the latest astronomical stories and book your observations.
+        </Typography>
+        <Button
+              type="submit"
+              variant="contained"
+              sx={{ mb: 1, backgroundColor: 'rgba(104, 112, 124, 0.5)', border: '2px soild white' }}
+              component={Link}
+              to="/register"
+        >
+          Sign Up
+        </Button>
+        <Grid item sx={{ mb: '30px', mt: '10px' }}>
+          <RouterLink to="/login" style={{ textDecoration: 'none', color: 'lightblue' }}>
+            Already have an account? Sign in
+          </RouterLink>
+        </Grid>
+      </Grid>
     </>
   );
 };

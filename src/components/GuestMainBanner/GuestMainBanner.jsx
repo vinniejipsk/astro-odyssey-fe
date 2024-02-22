@@ -1,8 +1,6 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 
-import backgroundImage from '../../assets/images/background/night_sky_edit.jpg'; 
-
 export default function GuestMainBanner () {
   return (
     <Box
@@ -22,8 +20,7 @@ export default function GuestMainBanner () {
         sx={{ 
           textAlign: 'center',
           fontWeight: '400',
-          border: '3px solid white',
-          borderRadius: '15px',
+          // border: '2px solid white',
           paddingBlock: '1rem',
           paddingInline: '3rem',
         }}>
