@@ -12,7 +12,7 @@ import MainPage from "./pages/MainPage/MainPage";
 
 import NavBar from "./components/NavBar/NavBar";
 // import BackgroundPlate from "./components/BackgroundPlate/BackgroundPlate";
-import ParticlesBackground from "./components/ParticlesBackground/ParticlesBackground";
+import ParticlesBackground from "./components/Background/ParticlesBackground/ParticlesBackground";
 
 import SignUpForm from "./components/SignUpForm/SignUpForm";
 import SignInForm from "./components/SignInForm/SignInForm";

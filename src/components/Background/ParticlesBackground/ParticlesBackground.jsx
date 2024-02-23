@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import './particles.js'; // Adjust based on actual export of particles.js
-import backgroundImage from '../../assets/images/background/night_sky_edit2.jpg'; // Adjust the path as necessary
+import backgroundImage from '../../../assets/images/background/night_sky_edit2.jpg'; // Adjust the path as necessary
 
 const ParticlesBackground = () => {
   useEffect(() => {
