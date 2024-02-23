@@ -7,6 +7,22 @@ import Button from '@mui/material/Button';
 export default function GuestInfo() {
   return (
     <>
+      <Box
+        sx={{
+          display: 'flex', // Use flexbox layout
+          flexDirection: 'column', // Stack children vertically
+          justifyContent: 'center', // Center vertically
+          alignItems: 'center', // Center horizontally
+          color: 'white', // Set the text color to white for better contrast
+          paddingTop: '1.25rem', // Add some padding for spacing inside the banner
+          paddingBottom: '1.25rem', // Add some padding for spacing inside the banner
+          backgroundColor: 'rgba(0, 0, 0, 0.25)',
+        }} 
+      >
+        <Typography sx={{ fontSize: '20px', textAlign: 'center' }} component="p">
+            What is this website about?
+        </Typography>
+      </Box>
       <Grid container sx={{
         backgroundColor: 'rgba(104, 112, 124, 0.2)', // Set the background color
         color: 'white', // Set the text color to white for better contrast
