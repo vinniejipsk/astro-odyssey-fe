@@ -2,14 +2,14 @@ import React from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
+import { getPosts } from "../../../api/posts";
 import { Link } from 'react-router-dom';
 
 export default function SocialPostCard(props) {
-  const { title, description } = props;
+  const { title, description, postId } = props;
 
   return (
     <Card 
@@ -30,11 +30,11 @@ export default function SocialPostCard(props) {
           {description}
         </Typography>
       </CardContent>
-      {/* <CardActions>
+      <CardActions>
         <Link to={`/posts/${postId}`}>
           <Button size="small">Learn More</Button>
         </Link>
-      </CardActions> */}
+      </CardActions>
     </Card>
   );
 }

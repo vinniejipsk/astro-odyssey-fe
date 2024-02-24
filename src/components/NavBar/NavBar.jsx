@@ -6,8 +6,11 @@ import {
   IconButton,
   Box,
 } from "@mui/material";
+import Button from '@mui/material/Button';
 
 import { Link } from "react-router-dom";
+
+import MenuDrawer from "./MenuDrawer";
 
 // import { getToken } from "../../util/security";
 
@@ -38,51 +41,29 @@ export default function NavBar() {
             </IconButton>
 
             <Box sx={{ flexGrow: 1 }}></Box>
-              <Box 
+              <Button 
                   sx={{ 
                       display: "flex", 
                       alignItems: "center",
                       border: '1px solid white', // Add border, specify color as needed
                       borderRadius: '10px', // Adjust for desired curvature
-                      padding: '3px 16px', // Add some padding inside the border
+                      padding: '4.5px 10px', // Add some padding inside the border
                   }}
               >
                 <Link
                     // to={`/user/${userId}`}
+                    to={`/user`}
                     style={{
                     textDecoration: "none",
                     color: "inherit",
                     }}
                 >
-                    <Typography sx={{ fontSize: '18px' }} color="inherit" component="div" >
+                    <Typography sx={{ fontSize: '16px', color: 'white' }} color="inherit" component="div" >
                     User
                     </Typography>
                 </Link>
-              </Box>
-
-              <Box 
-                  sx={{ 
-                      display: "flex", 
-                      alignItems: "center",
-                      border: '1px solid white', // Add border, specify color as needed
-                      borderRadius: '2px', // Adjust for desired curvature
-                      padding: '4px 16px', // Add some padding inside the border
-                      marginLeft: '10px',
-                  }}
-              >
-                <Link
-                    // to={`/menu`}
-                    style={{
-                    textDecoration: "none",
-                    color: "inherit",
-                    }}
-                >
-                    <Typography sx={{ fontSize: '16px' }} color="inherit" component="div" >
-                    MENU
-                    </Typography>
-                </Link>
-              </Box>
-              
+              </Button>
+              <MenuDrawer />
           </Toolbar>
         </AppBar>
       </Box>

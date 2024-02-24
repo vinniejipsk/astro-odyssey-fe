@@ -1,5 +1,15 @@
 import * as postsAPI from "../api/posts";
 
+export async function getPost(postId) {
+  try {
+    const response = await postsAPI.getPost(postId);
+    return response;
+  } catch (error) {
+    console.error("Error getting the post:", error);
+    throw error;
+  }
+}
+
 export async function submitPost(postData) {
     const Data = await postsAPI.createPost(postData);
     return Data;
