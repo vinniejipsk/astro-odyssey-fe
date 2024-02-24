@@ -4,7 +4,9 @@ import GuestMainBanner from '../../components/Guest/GuestMainBanner/GuestMainBan
 import GuestInfo from '../../components/Guest/GuestInfo/GuestInfo';
 
 import UserMainBanner from '../../components/User/UserMainBanner/UserMainBanner';
-import UserSinglePost from '../../components/User/UserSinglePost/UserSinglePost';
+import ScheduleAdd from '../../components/Main/ScheduleAdd/ScheduleAdd';
+import PostCards from '../../components/Main/PostCards/PostCards';
+
 import { getPosts } from '../../api/posts';
 import { Grid } from '@mui/material';
 
@@ -31,10 +33,11 @@ export default function MainPage () {
       <GuestInfo /> */}
 
       <UserMainBanner />
+      <ScheduleAdd />
       <Grid container spacing={2} justifyContent="center">
         {posts.map((post, index) => (
           <Grid item xs={12} key={index} style={{ display: 'flex', justifyContent: 'center', textAlign: 'left' }}>
-            <UserSinglePost 
+            <PostCards
               title={post.title}
               description={post.description}
               postId={post._id}
