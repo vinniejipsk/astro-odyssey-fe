@@ -5,6 +5,7 @@ import { Routes, Route, Link } from "react-router-dom";
 
 import AuthPage from "./pages/AuthPage/AuthPage";
 import MainPage from "./pages/MainPage/MainPage";
+import ContentPage from "./pages/ContentPage/ContentPage";
 
 // import UserPage from "./pages/UserPage/UserPage";
 // import EventPage from "./pages/EventPage/EventPage";
@@ -16,7 +17,6 @@ import ParticlesBackground from "./components/Background/ParticlesBackground/Par
 
 import SignUpForm from "./components/SignUpForm/SignUpForm";
 import SignInForm from "./components/SignInForm/SignInForm";
-// import CreateReviewForm from "./components/CreateReviewForm/CreateReviewForm";
 
 // import ViewReviewPage from "./components/ViewReviewPage/ViewReviewPage";
 // import UpdateReviewForm from "./components/CreateReviewForm/UpdateReviewForm";
@@ -29,12 +29,12 @@ function App() {
       <ParticlesBackground />
       <NavBar />
       <div>
-          {/* <AuthPage /> */}
           <Routes>
             <Route path="/" element={<MainPage />} />
             <Route path="/register" element={<SignUpForm />} />
             {/* <Route path="/login" element={<SignInForm setUser={setUser} setUserId={setUserId} />} /> */}
             <Route path="/login" element={<SignInForm />} />
+            <Route path="/create" element={<ContentPage />} />
           </Routes>
       </div>
     </main>

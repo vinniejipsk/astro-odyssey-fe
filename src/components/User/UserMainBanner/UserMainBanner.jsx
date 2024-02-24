@@ -12,8 +12,8 @@ export default function GuestMainBanner () {
         height: '200px',
         backgroundColor: 'rgba(24,54,94,0)', // Set the background color to dark blue
         color: 'white', // Set the text color to white for better contrast
-        paddingTop: '4rem', // Add some padding for spacing inside the banner
-        paddingBottom: '3rem', // Add some padding for spacing inside the banner
+        paddingTop: '5rem', // Add some padding for spacing inside the banner
+        paddingBottom: '1.5rem', // Add some padding for spacing inside the banner
       }}
     >
       <Typography variant="h2" component="h1" 
