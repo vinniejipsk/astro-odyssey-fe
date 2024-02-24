@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import { Routes, Route, Link } from "react-router-dom";
+
 // import { getUser, logoutUser } from "./service/users";
+import { getPost } from './service/posts'
 
 import AuthPage from "./pages/AuthPage/AuthPage";
 import MainPage from "./pages/MainPage/MainPage";
 import ContentPage from "./pages/ContentPage/ContentPage";
-
 // import UserPage from "./pages/UserPage/UserPage";
 // import EventPage from "./pages/EventPage/EventPage";
-// import SinglePostPage from "./pages/SinglePostPage/SinglePostPage";
+
+import PostFormCreate from "./components/Post/PostFormCreate/PostFormCreate"
 
 import NavBar from "./components/NavBar/NavBar";
 // import BackgroundPlate from "./components/BackgroundPlate/BackgroundPlate";
@@ -34,7 +36,8 @@ function App() {
             <Route path="/register" element={<SignUpForm />} />
             {/* <Route path="/login" element={<SignInForm setUser={setUser} setUserId={setUserId} />} /> */}
             <Route path="/login" element={<SignInForm />} />
-            <Route path="/create" element={<ContentPage />} />
+            <Route path="/posts/:postId" element={<ContentPage />} />
+            <Route path="/create" element={<PostFormCreate />} />
           </Routes>
       </div>
     </main>

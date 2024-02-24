@@ -29,10 +29,23 @@ export async function createPost(postData) {
   }
 }
 
-
 export async function getPosts() {
   try {
     const response = await fetch(BASE_URL);
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("There was a problem with the fetch operation:", error);
+  }
+}
+
+export async function getPost(postId) {
+
+  const postURL = `${BASE_URL}/${postId}`;
+  try {
+    const response = await fetch(postURL);
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }

@@ -30,8 +30,7 @@ export default function ScheduleAdd () {
               color: 'white',
               backgroundColor: 'rgba(255,255,255,0.1)',
               '&:hover': {
-                backgroundColor: 'rgba(255,255,255,0.8)',
-                color: 'black'
+                backgroundColor: 'rgba(255,255,255,0.2)',
               },
               '&:focus': {
                 outline: 'none',
@@ -49,7 +48,7 @@ export default function ScheduleAdd () {
             color: 'white',
           }}
         >
-          Welcome Explorer.
+          Welcome Explorer
         </Typography>
       </Grid>
       <Grid item xs={12} sm={4}>
@@ -61,8 +60,7 @@ export default function ScheduleAdd () {
               color: 'white',
               backgroundColor: 'rgba(255,255,255,0.1)',
               '&:hover': {
-                backgroundColor: 'rgba(255,255,255,0.8)',
-                color: 'black'
+                backgroundColor: 'rgba(255,255,255,0.2)',
               },
               '&:focus': {
                 outline: 'none',
