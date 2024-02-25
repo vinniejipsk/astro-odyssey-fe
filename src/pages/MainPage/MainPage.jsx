@@ -29,10 +29,6 @@ export default function MainPage () {
 
   return (
     <>
-      {/* <GuestMainBanner />
-      <GuestInfo /> */}
-
-      <UserMainBanner />
       <ScheduleAdd />
       <Grid container spacing={2} justifyContent="center">
         {posts.map((post, index) => (
