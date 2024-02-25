@@ -20,6 +20,10 @@ import ParticlesBackground from "./components/Background/ParticlesBackground/Par
 import SignUpForm from "./components/SignUpForm/SignUpForm";
 import SignInForm from "./components/SignInForm/SignInForm";
 
+import GuestMainBanner from "./components/Guest/GuestMainBanner/GuestMainBanner";
+import UserMainBanner from "./components/User/UserMainBanner/UserMainBanner";
+import GuestInfo from "./components/Guest/GuestInfo/GuestInfo";
+
 // import ViewReviewPage from "./components/ViewReviewPage/ViewReviewPage";
 // import UpdateReviewForm from "./components/CreateReviewForm/UpdateReviewForm";
 // import { getToken } from "./util/security";
@@ -30,14 +34,27 @@ function App() {
     <main className="App">
       <ParticlesBackground />
       <NavBar />
+
+      {/* GUEST */}
       <div>
+        {/* <GuestMainBanner /> */}
+        {/* <GuestInfo /> */}
+        {/* <Routes> */}
+          {/* <Route path="/register" element={<SignUpForm />} /> */}
+          {/* <Route path="/login" element={<SignInForm />} /> */}
+        {/* </Routes> */}
+      </div>
+
+      {/* USER LOGGED IN */}
+      <div>
+        <UserMainBanner />
           <Routes>
-            <Route path="/" element={<MainPage />} />
-            <Route path="/register" element={<SignUpForm />} />
-            {/* <Route path="/login" element={<SignInForm setUser={setUser} setUserId={setUserId} />} /> */}
-            <Route path="/login" element={<SignInForm />} />
-            <Route path="/posts/:postId" element={<ContentPage />} />
-            <Route path="/create" element={<PostFormCreate />} />
+              <Route path="/" element={<MainPage />} />
+
+              {/* <Route path="/login" element={<SignInForm setUser={setUser} setUserId={setUserId} />} /> */}
+
+              <Route path="/posts/:postId" element={<ContentPage />} />
+              <Route path="/create" element={<PostFormCreate />} />
           </Routes>
       </div>
     </main>

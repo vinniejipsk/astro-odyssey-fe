@@ -24,7 +24,7 @@ export default function ContentPage () {
 
   return (
     <>
-      <Grid sx ={{ mt: '10rem', }}>
+      <Grid>
         {post && ( // Only attempt to render PostFormView if post data is available
           <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center', textAlign: 'left' }}>
             <PostFormView
