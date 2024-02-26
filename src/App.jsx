@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
-import "./App.css";
 import { Routes, Route, Link } from "react-router-dom";
 
-// import { getUser, logoutUser } from "./service/users";
+import "./App.css";
+import { Button } from "@mui/material";
+
+import { getUser, logoutUser } from "./service/users";
 import { getPost } from './service/posts'
 
-import AuthPage from "./pages/AuthPage/AuthPage";
 import MainPage from "./pages/MainPage/MainPage";
 import ContentPage from "./pages/ContentPage/ContentPage";
-// import UserPage from "./pages/UserPage/UserPage";
+import UserPage from "./pages/UserPage/UserPage";
 // import EventPage from "./pages/EventPage/EventPage";
 
 import PostFormCreate from "./components/Post/PostFormCreate/PostFormCreate"
 
 import NavBar from "./components/NavBar/NavBar";
-// import BackgroundPlate from "./components/BackgroundPlate/BackgroundPlate";
 import ParticlesBackground from "./components/Background/ParticlesBackground/ParticlesBackground";
 
 import SignUpForm from "./components/SignUpForm/SignUpForm";
@@ -24,38 +24,66 @@ import GuestMainBanner from "./components/Guest/GuestMainBanner/GuestMainBanner"
 import UserMainBanner from "./components/User/UserMainBanner/UserMainBanner";
 import GuestInfo from "./components/Guest/GuestInfo/GuestInfo";
 
-// import ViewReviewPage from "./components/ViewReviewPage/ViewReviewPage";
-// import UpdateReviewForm from "./components/CreateReviewForm/UpdateReviewForm";
-// import { getToken } from "./util/security";
+import { getToken } from "./util/security";
 
 function App() {
+  const [user, setUser] = useState(getUser());
+  const [userId, setUserId] = useState("");
+  const [userData, setUserData] = useState({});
+  
+  // retrieve user id when logged in
+  useEffect(() => {
+    const token = getToken();
+    const payload = token
+      ? JSON.parse(atob(token.split(".")[1])).payload
+      : null;
+    if (payload && payload._id) {
+      setUserId(payload._id);
+    }
+  }, []);
+
+  function handleLogOut() {
+    logoutUser();
+    setUser(null);
+  }
 
   return (
     <main className="App">
       <ParticlesBackground />
-      <NavBar />
-
-      {/* GUEST */}
+      <NavBar userId={userId} handleLogOut={handleLogOut} />
       <div>
-        {/* <GuestMainBanner /> */}
-        {/* <GuestInfo /> */}
-        {/* <Routes> */}
-          {/* <Route path="/register" element={<SignUpForm />} /> */}
-          {/* <Route path="/login" element={<SignInForm />} /> */}
-        {/* </Routes> */}
-      </div>
-
-      {/* USER LOGGED IN */}
-      <div>
-        <UserMainBanner />
-          <Routes>
+      {user ? (
+          <>
+            <UserMainBanner />
+            <Routes>
               <Route path="/" element={<MainPage />} />
-
-              {/* <Route path="/login" element={<SignInForm setUser={setUser} setUserId={setUserId} />} /> */}
-
-              <Route path="/posts/:postId" element={<ContentPage />} />
+              <Route
+                path="/user/:userId"
+                element={
+                  <UserPage userData={userData} setUserData={setUserData} />
+                }
+              />
               <Route path="/create" element={<PostFormCreate />} />
-          </Routes>
+              <Route path="/posts/:postId" element={<ContentPage />} />
+              {/* <Route
+                path="/reviews/:reviewId/edit"
+                element={<UpdateReviewForm />}
+              /> */}
+            </Routes>
+          </>
+        ) : (
+          <>
+            <GuestMainBanner />
+            <GuestInfo />
+            <Routes>
+              <Route path="/register" element={<SignUpForm />} />
+              <Route
+                path="/login"
+                element={<SignInForm setUser={setUser} setUserId={setUserId} />}
+              />
+            </Routes>
+          </>
+        )}
       </div>
     </main>
   );

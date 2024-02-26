@@ -8,7 +8,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import { Link } from 'react-router-dom';
 
-export default function MenuDrawer() {
+export default function MenuDrawer({ userId, handleLogOut }) {
   const [state, setState] = React.useState({
     right: false,
   });
@@ -47,6 +47,13 @@ export default function MenuDrawer() {
         </ListItemButton>
       </List>
       <Divider sx={{ bgcolor: 'gray' }} />
+      {userId && (
+        <List>
+          <ListItemButton onClick={handleLogOut}>
+            <ListItemText primary="Log Out" />
+          </ListItemButton>
+        </List>
+      )}
     </Box>
   );
 

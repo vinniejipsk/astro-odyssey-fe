@@ -6,9 +6,10 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { signUp } from "../../service/users";
 import { Link as RouterLink } from 'react-router-dom';
-// import { hashData } from "../../util/security";
+
+import { signUp } from "../../service/users";
+import { hashData } from "../../util/security";
 
 export default function SignUpForm() {
   const [formState, setFormState] = useState({});
@@ -20,15 +21,15 @@ export default function SignUpForm() {
     setFormState(currForm);
   }
 
-//   function hashPassword() {
-//     var currForm = formState;
-//     if (currForm.password) {
-//       var hash = hashData(currForm.password);
-//       currForm.password = hash.hash;
-//       currForm.salt = hash.salt;
-//       currForm.iterations = hash.iterations;
-//     }
-//   }
+  function hashPassword() {
+    var currForm = formState;
+    if (currForm.password) {
+      var hash = hashData(currForm.password);
+      currForm.password = hash.hash;
+      currForm.salt = hash.salt;
+      currForm.iterations = hash.iterations;
+    }
+  }
 
   async function handleSubmit(evt) {
     try {
@@ -36,7 +37,7 @@ export default function SignUpForm() {
       // We don't want to send the 'error' or 'confirm' property,
       //  so let's make a copy of the state object, then delete them
       
-    //   hashPassword();
+      hashPassword();
       const formData = { ...formState };
       delete formData.error;
       delete formData.confirm;

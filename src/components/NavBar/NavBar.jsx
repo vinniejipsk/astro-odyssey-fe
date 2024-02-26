@@ -12,16 +12,13 @@ import { Link } from "react-router-dom";
 
 import MenuDrawer from "./MenuDrawer";
 
-// import { getToken } from "../../util/security";
+import { getToken } from "../../util/security";
 
-export default function NavBar() {
-//   const token = getToken();
-//   const userId = token
-//     ? JSON.parse(atob(token.split(".")[1])).payload._id
-//     : null; // Decode JWT to get userId
-//   const username = token
-//     ? JSON.parse(atob(token.split(".")[1])).payload.user
-//     : "guest!";
+export default function NavBar({ handleLogOut }) {
+  const token = getToken();
+  const userId = token
+    ? JSON.parse(atob(token.split(".")[1])).payload._id
+    : null; // Decode JWT to get userId
 
   return (
     <>
@@ -51,8 +48,7 @@ export default function NavBar() {
                   }}
               >
                 <Link
-                    // to={`/user/${userId}`}
-                    to={`/user`}
+                    to={`/user/${userId}`}
                     style={{
                     textDecoration: "none",
                     color: "inherit",
@@ -63,7 +59,7 @@ export default function NavBar() {
                     </Typography>
                 </Link>
               </Button>
-              <MenuDrawer />
+              <MenuDrawer userId={userId} handleLogOut={handleLogOut} />
           </Toolbar>
         </AppBar>
       </Box>

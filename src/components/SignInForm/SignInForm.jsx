@@ -9,10 +9,10 @@ import { useState } from "react";
 
 import { Link as RouterLink } from 'react-router-dom';
 
-// import { getLoginDetails, getUser, loginUser } from "../../service/users";
-// import { hashDataWithSaltRounds, storeToken } from "../../util/security";
+import { getLoginDetails, getUser, loginUser } from "../../service/users";
+import { hashDataWithSaltRounds, storeToken } from "../../util/security";
 
-export default function LogInForm({ setUser }) {
+export default function SignInForm({ setUser }) {
   const [formState, setFormState] = useState({});
   const [logInStatus, setLogInStatus] = useState("");
 

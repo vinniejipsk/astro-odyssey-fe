@@ -1,5 +1,5 @@
 import * as usersAPI from "../api/users";
-// import { getToken } from "../util/security";
+import { getToken } from "../util/security";
 
 export async function signUp(userData) {
   // Delegate the network request code to the users-api.js API module
@@ -26,16 +26,16 @@ export async function loginUser(userData) {
 }
 
 export function getUser() {
-  // const token = getToken();
+  const token = getToken();
   // If there's a token, return the user in the payload, otherwise return null
-  // return token ? JSON.parse(atob(token.split(".")[1])).payload.user : null;
+  return token ? JSON.parse(atob(token.split(".")[1])).payload.user : null;
 }
 
-// export function getUserPayload() {
-//   const token = getToken();
+export function getUserPayload() {
+  const token = getToken();
 //   // If there's a token, return the user in the payload, otherwise return null
-//   return token ? JSON.parse(atob(token.split(".")[1])).payload : null;
-// }
+  return token ? JSON.parse(atob(token.split(".")[1])).payload : null;
+}
 
 export async function logoutUser() {
   const token = getToken();
