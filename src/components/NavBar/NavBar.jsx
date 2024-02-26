@@ -38,28 +38,30 @@ export default function NavBar({ handleLogOut }) {
             </IconButton>
 
             <Box sx={{ flexGrow: 1 }}></Box>
+            {userId && (
               <Button 
-                  sx={{ 
-                      display: "flex", 
-                      alignItems: "center",
-                      border: '1px solid white', // Add border, specify color as needed
-                      borderRadius: '10px', // Adjust for desired curvature
-                      padding: '4.5px 10px', // Add some padding inside the border
+              sx={{ 
+                  display: "flex", 
+                  alignItems: "center",
+                  border: '1px solid white', // Add border, specify color as needed
+                  borderRadius: '10px', // Adjust for desired curvature
+                  padding: '4.5px 10px', // Add some padding inside the border
+              }}
+              >
+              <Link
+                  to={`/user/${userId}`}
+                  style={{
+                  textDecoration: "none",
+                  color: "inherit",
                   }}
               >
-                <Link
-                    to={`/user/${userId}`}
-                    style={{
-                    textDecoration: "none",
-                    color: "inherit",
-                    }}
-                >
-                    <Typography sx={{ fontSize: '16px', color: 'white' }} color="inherit" component="div" >
-                    User
-                    </Typography>
-                </Link>
-              </Button>
-              <MenuDrawer userId={userId} handleLogOut={handleLogOut} />
+                  <Typography sx={{ fontSize: '16px', color: 'white' }} color="inherit" component="div" >
+                  User
+                  </Typography>
+              </Link>
+          </Button>
+            )}
+            <MenuDrawer userId={userId} handleLogOut={handleLogOut} />
           </Toolbar>
         </AppBar>
       </Box>

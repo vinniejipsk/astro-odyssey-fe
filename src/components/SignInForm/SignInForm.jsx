@@ -1,18 +1,20 @@
 import * as React from "react";
+import { useNavigate } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
+import { useState } from "react";
+
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { useState } from "react";
-
-import { Link as RouterLink } from 'react-router-dom';
 
 import { getLoginDetails, getUser, loginUser } from "../../service/users";
 import { hashDataWithSaltRounds, storeToken } from "../../util/security";
 
 export default function SignInForm({ setUser }) {
+  const navigagte = useNavigate();
   const [formState, setFormState] = useState({});
   const [logInStatus, setLogInStatus] = useState("");
 
@@ -45,7 +47,7 @@ export default function SignInForm({ setUser }) {
       }
       // render welcome message
       setUser(getUser());
-
+      navigagte('/');
       // retrieve user id from token
     } catch (e) {
       console.log(e);
