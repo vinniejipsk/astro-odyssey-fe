@@ -6,14 +6,14 @@ import EditProfile from "./EditProfile";
 import { fetchUserData } from "../../service/users";
 
 function UserPage({ userData, setUserData }) {
-//   const [userReviews, setUserReviews] = useState([]);
+//   const [userPosts, setUserPosts] = useState([]);
   const { userId } = useParams();
   const [editProfile, setEditProfile] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      const reviews = await fetchReviewsData(userId);
-      setUserReviews(reviews);
+      const posts = await fetchPostsData(userId);
+      setUserPosts(posts);
       const user = await fetchUserData(userId);
       setUserData(user);
     };
@@ -68,8 +68,8 @@ function UserPage({ userData, setUserData }) {
             )}
           </Box>
           <br />
-          {/* <div>User Reviews</div> */}
-          {/* <UserReviews reviews={userReviews} /> */}
+          {/* <div>User Posts</div> */}
+          {/* <UserPosts posts={userPosts} /> */}
         </>
       )}
     </>

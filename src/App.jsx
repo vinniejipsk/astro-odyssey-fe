@@ -13,6 +13,7 @@ import UserPage from "./pages/UserPage/UserPage";
 // import EventPage from "./pages/EventPage/EventPage";
 
 import PostFormCreate from "./components/Post/PostFormCreate/PostFormCreate"
+import PostFormUpdate from "./components/Post/PostFormUpdate/PostFormUpdate";
 
 import NavBar from "./components/NavBar/NavBar";
 import ParticlesBackground from "./components/Background/ParticlesBackground/ParticlesBackground";
@@ -65,10 +66,10 @@ function App() {
               />
               <Route path="/create" element={<PostFormCreate />} />
               <Route path="/posts/:postId" element={<ContentPage />} />
-              {/* <Route
-                path="/reviews/:reviewId/edit"
-                element={<UpdateReviewForm />}
-              /> */}
+              <Route
+                path="/posts/:postId/edit"
+                element={<PostFormUpdate />}
+              />
             </Routes>
           </>
         ) : (

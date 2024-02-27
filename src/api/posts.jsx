@@ -5,14 +5,14 @@ const BASE_URL = "http://localhost:3000/posts";
 
 export async function createPost(postData) {
   const createURL = BASE_URL + '/create';
-  // const token = localStorage.getItem('token'); // Get the stored JWT token
+  const token = localStorage.getItem('token'); // Get the stored JWT token
 
   try {
     const res = await fetch(createURL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        // "Authorization": `Bearer ${token}` // Include the JWT token in the request
+        "Authorization": `Bearer ${token}` // Include the JWT token in the request
       },
       body: JSON.stringify(postData),
     });
@@ -56,6 +56,7 @@ export async function getPost(postId) {
 }
 
 export async function updatePost(postId, postData, userId) {
+
   const updateURL = `${BASE_URL}/${postId}/edit?userId=${userId}`;
   const token = localStorage.getItem('token'); 
 
