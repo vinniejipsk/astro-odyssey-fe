@@ -142,7 +142,7 @@ export async function updateUserData(data, userId) {
   });
 
   if (response.ok) {
-    console.log("User data updated successfully");
+    // console.log("User data updated successfully");
   } else {
     console.error("Failed to update user data");
   }

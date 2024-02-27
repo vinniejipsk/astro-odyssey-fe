@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { updateUserData } from "../../service/users";
 
-function EditProfile({ userData, setUserData }) {
+export default function EditProfile({ userData, setUserData }) {
   const [formUserData, setFormUserData] = useState({});
   const { userId } = useParams();
 
@@ -40,5 +40,3 @@ function EditProfile({ userData, setUserData }) {
     </form>
   );
 }
-
-export default EditProfile;

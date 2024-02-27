@@ -42,7 +42,7 @@ export default function MenuDrawer({ userId, handleLogOut }) {
         <ListItemButton key="Perks">
           <ListItemText primary="Perks" sx={{ color: 'gray' }} />
         </ListItemButton>
-        <ListItemButton component={Link} to="/schedule" key="Schedule Observations">
+        <ListItemButton component={Link} to="/schedule" key="Schedule Observations" sx={{ color: 'gray' }}>
           <ListItemText primary="Schedule Observations" />
         </ListItemButton>
       </List>
