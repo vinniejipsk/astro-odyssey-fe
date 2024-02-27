@@ -8,24 +8,24 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
 import { submitPost } from "../../../service/posts";
-// import { getUser } from "../../../service/users";
-// import { getToken } from "../../util/security";
+import { getUser } from "../../../service/users";
+import { getToken } from "../../../util/security";
 
 
-export default function CreatePostForm() {
+export default function PostFormCreate() {
   const [postForm, setPostForm] = useState({
     userId: "",
     title: "",
     description: "",
   });
-  const [formErrors, setFormErrors] = useState({});
+  // const [formErrors, setFormErrors] = useState({});
 
-  // useEffect(() => {
-  //   const user = getUser();
-  //   if (user) {
-  //     setPostForm((prevState) => ({ ...prevState, userId: user }));
-  //   }
-  // }, []);
+  useEffect(() => {
+    const user = getUser();
+    if (user) {
+      setPostForm((prevState) => ({ ...prevState, userId: user }));
+    }
+  }, []);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -34,50 +34,33 @@ export default function CreatePostForm() {
 
   async function handleSubmit(evt) {
     evt.preventDefault();
-    // const { userId, ...submissionData } = postForm; 
-    // const submissionData = postForm.userId ? { ...postForm } : { ...postForm, userId: undefined };
-    const submissionData = { ...postForm, userId: "anonymous" }; 
-    console.log(submissionData)
-    // const token = getToken();
-    // const payload = token ? JSON.parse(atob(token.split(".")[1])).payload : null;
-    try {
-      const response = await submitPost(submissionData);
-      // Reset the form on successful submission
-      setPostForm({
-        userId: "",
-        title: "",
-        description: "",
-      });
-      setFormErrors({});
-    } catch (error) {
-      // Handle error feedback
-      console.error("Error submitting post:", error);
+
+    const token = getToken();
+    const payload = token ? JSON.parse(atob(token.split(".")[1])).payload : null;
+  
+    if (payload && payload._id) {
+      const updatedPostForm = { ...postForm, userId: payload._id };
+
+      // if (!validateForm()) {
+      //   return;
+      // }
+      try {
+        const response = await submitPost(updatedPostForm);
+        // Reset the form on successful submission
+        setPostForm({
+          userId: "",
+          title: "",
+          description: "",
+        });
+        // setFormErrors({});
+      } catch (e) {
+        console.error("Error submitting post", e);
+        alert("Error submitting post");
+      }
+    } else {
+      alert("Please log in to submit a post");
     }
   }
-  //   if (payload && payload._id) {
-  //     const updatedPostForm = { ...postForm, userId: payload._id };
-
-  //     if (!validateForm()) {
-  //       return;
-  //     }
-
-  //     try {
-  //       const response = await submitPost(updatedPostForm);
-  //       // Reset the form on successful submission
-  //       setPostForm({
-  //         userId: "",
-  //         title: "",
-  //         description: "",
-  //       });
-  //       setFormErrors({});
-  //     } catch (e) {
-  //       console.error("Error submitting post", e);
-  //       alert("Error submitting post");
-  //     }
-  //   } else {
-  //     alert("Please log in to submit a post");
-  //   }
-  // }
 
   return (
       <Container component="main" sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -193,7 +176,7 @@ export default function CreatePostForm() {
             >
               Submit Post
             </Button>
-            {/* <input type="hidden" name="userId" value={postForm.userId} /> */}
+            <input type="hidden" name="userId" value={postForm.userId} />
           </Box>
         </Box>
       </Container>

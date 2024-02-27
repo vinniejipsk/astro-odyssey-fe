@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { Grid, Typography } from '@mui/material';
+import { useParams, useNavigate } from 'react-router-dom';
+import { Button, Grid, Typography } from '@mui/material';
 
 import { getPost } from '../../api/posts';
 
@@ -10,6 +10,8 @@ export default function ContentPage () {
 
   const [post, setPost] = useState([]);
   const { postId } = useParams();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,6 +23,10 @@ export default function ContentPage () {
 
     fetchData();
   }, [postId]);
+
+  const handleEditClick = () => {
+    navigate(`/posts/${postId}/edit`);
+  };
 
   return (
     <>
@@ -34,6 +40,7 @@ export default function ContentPage () {
             />
           </Grid>
         )}
+        <Button onClick={handleEditClick}>Edit</Button>
       </Grid>
     </>
   );  
