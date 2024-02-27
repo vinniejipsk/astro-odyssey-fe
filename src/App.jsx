@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 
 import "./App.css";
-import { Button } from "@mui/material";
 
 import { getUser, logoutUser } from "./service/users";
 import { getPost } from './service/posts'
@@ -25,7 +24,10 @@ import GuestMainBanner from "./components/Guest/GuestMainBanner/GuestMainBanner"
 import UserMainBanner from "./components/User/UserMainBanner/UserMainBanner";
 import GuestInfo from "./components/Guest/GuestInfo/GuestInfo";
 
+import EventPage from "./pages/EventPage/EventPage";
+
 import { getToken } from "./util/security";
+
 
 function App() {
   const [user, setUser] = useState(getUser());
@@ -64,6 +66,7 @@ function App() {
                   <UserPage userData={userData} setUserData={setUserData} />
                 }
               />
+              <Route path="/schedule" element={<EventPage/>} />
               <Route path="/create" element={<PostFormCreate />} />
               <Route path="/posts/:postId" element={<ContentPage />} />
               <Route
