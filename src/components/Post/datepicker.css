@@ -1,0 +1,35 @@
+.datePickerCustomization .MuiOutlinedInput-root fieldset {
+  border-color: white !important;
+}
+
+.datePickerCustomization .MuiOutlinedInput-root.Mui-focused fieldset {
+  border-color: white !important;
+}
+
+.datePickerCustomization .MuiOutlinedInput-input {
+  color: white !important;
+}
+
+.datePickerCustomization .MuiInputLabel-root {
+  color: white !important;
+}
+
+.datePickerCustomization .MuiSvgIcon-root {
+  color: white !important;
+}
+
+.datePickerCustomization .MuiOutlinedInput-root.Mui-disabled fieldset {
+  border-color: gray !important;
+}
+
+.datePickerCustomization .MuiOutlinedInput-root.Mui-disabled .MuiOutlinedInput-input {
+  color: gray !important; 
+}
+
+.datePickerCustomization .MuiInputLabel-root.Mui-disabled {
+  color: gray !important; 
+}
+
+.datePickerCustomization .MuiSvgIcon-root.Mui-disabled {
+  color: gray !important; 
+}
