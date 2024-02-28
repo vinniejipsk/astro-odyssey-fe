@@ -1,22 +1,40 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
+import { 
+  Button,
+  TextField,
+  Grid, 
+  Box, 
+  Typography, 
+  Container, 
+  Select, 
+  MenuItem, 
+  InputLabel, 
+  FormControl,
+} from "@mui/material";
+
+import { textFieldStyles } from "../formstyle"
+import '../datepicker.css'
+
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 import { submitPost } from "../../../service/posts";
 import { getUser } from "../../../service/users";
 import { getToken } from "../../../util/security";
-
 
 export default function PostFormCreate() {
   const [postForm, setPostForm] = useState({
     userId: "",
     title: "",
     description: "",
+    type: "", 
+    dateTime: "",
+    locationObserve: "",
+    visibility: "", 
+    magnitude: "", 
+    media: "",
   });
   // const [formErrors, setFormErrors] = useState({});
 
@@ -27,9 +45,21 @@ export default function PostFormCreate() {
     }
   }, []);
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
+  const handleInputChange = (eventOrValue, maybeValue) => {
+    let name, value;
+  
+    if (eventOrValue.target) {
+      name = eventOrValue.target.name;
+      value = eventOrValue.target.value;
+    } else {
+      name = "dateTime"; 
+      value = eventOrValue;
+    }
     setPostForm({ ...postForm, [name]: value });
+  };
+
+  const shouldDisableFields = () => {
+    return postForm.type === 'Discussion' || postForm.type === 'Guide';
   };
 
   async function handleSubmit(evt) {
@@ -46,11 +76,16 @@ export default function PostFormCreate() {
       // }
       try {
         const response = await submitPost(updatedPostForm);
-        // Reset the form on successful submission
         setPostForm({
           userId: "",
           title: "",
           description: "",
+          type: "",
+          dateTime: "",
+          locationObserve: "",
+          visibility: "",
+          magnitude: "",
+          media: "",
         });
         // setFormErrors({});
       } catch (e) {
@@ -93,40 +128,102 @@ export default function PostFormCreate() {
           >
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                  <TextField
-                    required
-                    fullWidth
-                    name="title"
-                    label="Title"
-                    value={postForm.title}
+                <TextField
+                  required
+                  fullWidth
+                  name="title"
+                  label="Title"
+                  value={postForm.title}
+                  onChange={handleInputChange}
+                  InputLabelProps={{
+                    style: { color: 'white' }, 
+                  }}
+                  sx={textFieldStyles}
+                />
+              </Grid>
+              <Grid item xs={6} sm={3}>
+                <FormControl 
+                  fullWidth
+                  sx={textFieldStyles}
+                >
+                  <InputLabel id="type-label" sx={{ color: 'white' }}>Event Type</InputLabel>
+                  <Select
+                    labelId="type-label"
+                    id="type"
+                    name="type"
+                    value={postForm.type}
+                    label="Event Type"
                     onChange={handleInputChange}
-                    InputLabelProps={{
-                      style: { color: 'white' }, // Style for the label
-                    }}
-                    sx={{
-                      '& label.Mui-focused': {
-                        color: 'white',
-                      },
-                      '& .MuiInput-underline:after': {
-                        borderBottomColor: 'white',
-                      },
-                      '& .MuiOutlinedInput-root': {
-                        '& fieldset': {
-                          borderColor: 'white',
-                        },
-                        '&:hover fieldset': {
-                          borderColor: 'white',
-                        },
-                        '&.Mui-focused fieldset': {
-                          borderColor: 'white',
-                        },
-                        '& input': {
-                          color: 'white', // This ensures input text color is white
-                        },
-                      },
-                    }}
+                  >
+                    {eventTypeOptions.map((option) => (
+                      <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item xs={8} sm={4}>
+                <FormControl 
+                  fullWidth
+                  sx={textFieldStyles}
+                >
+                  <InputLabel id="visibility-label" sx={{ color: 'white' }}>Visibility</InputLabel>
+                  <Select
+                    labelId="visibility-label"
+                    id="visibility"
+                    name="visibility"
+                    value={postForm.visibility}
+                    label="Visibility"
+                    onChange={handleInputChange}
+                    disabled={shouldDisableFields()}
+                  >
+                    {visibilityOptions.map((option) => (
+                      <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item xs={4} className="datePickerCustomization">
+                <LocalizationProvider 
+                  dateAdapter={AdapterDayjs}
+                >
+                  <DatePicker 
+                    fullWidth
+                    name="dateTime"
+                    label="Date and Time"
+                    value={postForm.dateTime}
+                    onChange={handleInputChange}
+                    disabled={shouldDisableFields()}
                   />
-                </Grid>
+                </LocalizationProvider>
+              </Grid>
+              <Grid item xs={5}>
+                <TextField
+                  fullWidth
+                  name="locationObserve"
+                  label="Where to Observe"
+                  value={postForm.locationObserve}
+                  onChange={handleInputChange}
+                  disabled={shouldDisableFields()}
+                  InputLabelProps={{
+                    style: { color: 'white' },
+                  }}
+                  sx={textFieldStyles}
+                />
+              </Grid>
+              <Grid item xs={3}>
+                <TextField
+                  fullWidth
+                  name="magnitude"
+                  label="Magnitude"
+                  value={postForm.magnitude}
+                  onChange={handleInputChange}
+                  disabled={shouldDisableFields()}
+                  InputLabelProps={{
+                    style: { color: 'white' },
+                  }}
+                  sx={textFieldStyles}
+                />
+              </Grid>
               <Grid item xs={12} >
                 <TextField
                   required
@@ -140,31 +237,20 @@ export default function PostFormCreate() {
                   InputLabelProps={{
                     style: { color: 'white' }, // Style for the label
                   }}
-                  sx={{
-                    '& label.Mui-focused': {
-                      color: 'white',
-                    },
-                    '& .MuiInput-underline:after': {
-                      borderBottomColor: 'white',
-                    },
-                    '& .MuiOutlinedInput-root': {
-                      '& fieldset': {
-                        borderColor: 'white',
-                      },
-                      '&:hover fieldset': {
-                        borderColor: 'white',
-                      },
-                      '&.Mui-focused fieldset': {
-                        borderColor: 'white',
-                      },
-                      '& input': {
-                        color: 'white', // Ensures input text color is white
-                      },
-                      '& textarea': {
-                        color: 'white', // Ensures textarea text color is white for multiline
-                      },
-                    },
-                  }}                  
+                  sx={textFieldStyles}               
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <TextField
+                  fullWidth
+                  name="media"
+                  label="Import Image Link"
+                  value={postForm.media}
+                  onChange={handleInputChange}
+                  InputLabelProps={{
+                    style: { color: 'white' },
+                  }}
+                  sx={textFieldStyles}
                 />
               </Grid>
             </Grid>
@@ -182,3 +268,20 @@ export default function PostFormCreate() {
       </Container>
   );
 }
+
+const eventTypeOptions = [
+  { label: "Meteor Shower", value: "Meteor Shower" },
+  { label: "Solar Eclipse", value: "Solar Eclipse" },
+  { label: "Planetary Transit", value: "Planetary Transit" },
+  { label: "Lunar Eclipse", value: "Lunar Eclipse" },
+  { label: "Opposition", value: "Opposition" },
+  { label: "Conjunction", value: "Conjunction" },
+  { label: "Guide", value: "Guide" },
+  { label: "Discussion", value: "Discussion" },
+];
+
+const visibilityOptions = [
+  { label: "Visible to the naked eye", value: "Visible to the naked eye" },
+  { label: "Requires a telescope to observe", value: "Requires a telescope to observe" },
+  { label: "None", value: "None" }
+];

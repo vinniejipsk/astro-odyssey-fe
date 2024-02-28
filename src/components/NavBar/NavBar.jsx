@@ -11,6 +11,7 @@ import Button from '@mui/material/Button';
 import { Link } from "react-router-dom";
 
 import MenuDrawer from "./MenuDrawer";
+import SearchBar from "../Search/SearchBar/SearchBar"
 
 import { getToken } from "../../util/security";
 
@@ -25,7 +26,6 @@ export default function NavBar({ handleLogOut }) {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="fixed" sx={{ backgroundColor: "black" }}>
           <Toolbar>
-
             <IconButton
               edge="start"
               color="inherit"
@@ -36,8 +36,11 @@ export default function NavBar({ handleLogOut }) {
             >
               AstroOdyssey
             </IconButton>
-
             <Box sx={{ flexGrow: 1 }}></Box>
+            {userId && (
+              // <SearchBar setWorldSearch={setWorldSearch} />
+              <SearchBar />
+            )}
             {userId && (
               <Button 
               sx={{ 
@@ -49,17 +52,17 @@ export default function NavBar({ handleLogOut }) {
               }}
               >
               <Link
-                  to={`/user/${userId}`}
-                  style={{
-                  textDecoration: "none",
-                  color: "inherit",
-                  }}
+                to={`/user/${userId}`}
+                style={{
+                textDecoration: "none",
+                color: "inherit",
+                }}
               >
-                  <Typography sx={{ fontSize: '16px', color: 'white' }} color="inherit" component="div" >
+                <Typography sx={{ fontSize: '16px', color: 'white' }} color="inherit" component="div" >
                   User
-                  </Typography>
+                </Typography>
               </Link>
-          </Button>
+              </Button>
             )}
             <MenuDrawer userId={userId} handleLogOut={handleLogOut} />
           </Toolbar>
