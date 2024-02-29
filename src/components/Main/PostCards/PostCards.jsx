@@ -4,6 +4,7 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { Grid, Box } from '@mui/material';
 
 import { getPosts } from "../../../api/posts";
 import { Link } from 'react-router-dom';
@@ -33,22 +34,27 @@ export default function SocialPostCard(props) {
           <Typography variant="body2" sx={{ color: 'white', margin: "1rem" }}>
             {description}
           </Typography>
-          <Typography variant="body2" sx={{ 
-            color: 'white', 
-            paddingBlock: "0.5rem", 
-            border: "solid white", 
-            borderRadius: "0.5rem", 
-            width:"5rem", 
-            textAlign: "center"
-          }}>
-            {username}
-          </Typography>
         </CardContent>
-        <CardActions>
-          <Link to={`/posts/${postId}`}>
-            <Button size="small">Learn More</Button>
-          </Link>
-        </CardActions>
+        <Grid container justifyContent="space-between" alignItems="center" sx={{ padding: "0 1rem" }}>
+          <Box sx={{ 
+            display: 'flex', 
+            justifyContent: 'center', 
+            alignItems: 'center', 
+            border: "1px solid white", 
+            borderRadius: "0.5rem", 
+            padding: "0.5rem 1rem",
+            marginBottom: "1rem",
+          }}>
+            <Typography variant="body2" sx={{ color: 'white' }}>
+              Posted by: {username}
+            </Typography>
+          </Box>
+          <CardActions>
+            <Link to={`/posts/${postId}`}>
+              <Button size="small">Learn More</Button>
+            </Link>
+          </CardActions>
+        </Grid>
     </Card>
   );
 }

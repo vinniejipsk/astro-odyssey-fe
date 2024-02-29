@@ -330,5 +330,6 @@ const eventTypeOptions = [
 const visibilityOptions = [
   { label: "Visible to the naked eye", value: "Visible to the naked eye" },
   { label: "Requires a telescope to observe", value: "Requires a telescope to observe" },
+  { label: "Visible to the naked eye with proper safety equipment", value: "Visible to the naked eye with proper safety equipment" },
   { label: "None", value: "None" }
 ];
