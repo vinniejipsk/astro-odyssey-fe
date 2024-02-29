@@ -17,7 +17,7 @@ export default function PostFormView(props) {
     magnitude,
     description,
     media,
-    // name
+    username
   } = props;
   const { postId } = useParams();
   const navigate = useNavigate();
@@ -63,9 +63,9 @@ export default function PostFormView(props) {
       <Typography variant="body2" sx={{ color: 'white' }}>
         Media: {media}
       </Typography>
-      {/* <Typography variant="body2" sx={{ color: 'white' }}>
-        Posted by: {name}
-      </Typography> */}
+      <Typography variant="body2" sx={{ color: 'white' }}>
+        Posted by: {username}
+      </Typography>
       </CardContent>
     </Card>
   );

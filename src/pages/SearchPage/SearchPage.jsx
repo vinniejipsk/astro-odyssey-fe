@@ -1,39 +1,42 @@
 import React, { useEffect, useState } from 'react';
 
-import GuestMainBanner from '../../components/Guest/GuestMainBanner/GuestMainBanner';
-import GuestInfo from '../../components/Guest/GuestInfo/GuestInfo';
-
-import UserMainBanner from '../../components/User/UserMainBanner/UserMainBanner';
-import ScheduleAdd from '../../components/Main/ScheduleAdd/ScheduleAdd';
-import PostCards from '../../components/Main/PostCards/PostCards';
-
-import { getPosts } from '../../api/posts';
+import { getPostsSearch } from '../../api/posts'; 
 import { Grid } from '@mui/material';
+import { useSearchParams } from 'react-router-dom';
+import SearchItem from '../../components/Search/SearchItem/SearchItem';
 
-export default function MainPage () {
-
+export default function SearchPage() {
+  const [searchParams] = useSearchParams();
+  const query = searchParams.get('query'); // Get the query from URL
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const posts = await getPosts();
-      if (posts && posts.length > 0) {
-        const maxPosts = posts.slice(0,9);
-        if (Array.isArray(maxPosts)) {
-          setPosts(maxPosts);
+    const fetchSearchResults = async () => {
+      try {
+        if (query) {
+          const fetchedPosts = await getPostsSearch(query);
+          console.log(fetchedPosts)
+          if (fetchedPosts) {
+            setPosts(fetchedPosts);
+          } else {
+            // Handle case where no posts are returned
+            setPosts([]);
+          }
         }
+      } catch (error) {
+        console.error("Failed to fetch search results:", error);
+        // Handle error state as needed
       }
     };
-    fetchData();
-  }, []);
+    fetchSearchResults();
+  }, [query]);
 
   return (
     <>
-      <ScheduleAdd />
       <Grid container spacing={2} justifyContent="center">
         {posts.map((post, index) => (
           <Grid item xs={12} key={index} style={{ display: 'flex', justifyContent: 'center', textAlign: 'left' }}>
-            <PostCards
+            <SearchItem
               title={post.title}
               description={post.description}
               postId={post._id}

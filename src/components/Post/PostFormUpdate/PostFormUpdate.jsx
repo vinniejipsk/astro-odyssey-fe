@@ -36,6 +36,7 @@ export default function PostFormUpdate() {
     visibility: "", 
     magnitude: "", 
     media: "",
+    username: "",
   });
   const [error, setError] = useState('');
   const { postId } = useParams();
@@ -65,6 +66,7 @@ export default function PostFormUpdate() {
           visibility: data.visibility || "", 
           magnitude: data.magnitude || "", 
           media: data.media || "",
+          username: data.username || "",
         });
       } catch (error) {
         setError(error.message);

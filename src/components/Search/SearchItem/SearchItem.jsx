@@ -5,10 +5,9 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-import { getPosts } from "../../../api/posts";
 import { Link } from 'react-router-dom';
 
-export default function SocialPostCard(props) {
+export default function SearchItem(props) {
   const { title, description, type, username, postId } = props;
 
   return (
@@ -30,9 +29,9 @@ export default function SocialPostCard(props) {
           <Typography variant="body2" sx={{ color: 'white', margin: "1rem" }}>
             {type}
           </Typography>
-          <Typography variant="body2" sx={{ color: 'white', margin: "1rem" }}>
+          {/* <Typography variant="body2" sx={{ color: 'white', margin: "1rem" }}>
             {description}
-          </Typography>
+          </Typography> */}
           <Typography variant="body2" sx={{ 
             color: 'white', 
             paddingBlock: "0.5rem", 

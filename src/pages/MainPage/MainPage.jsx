@@ -35,7 +35,9 @@ export default function MainPage () {
           <Grid item xs={12} key={index} style={{ display: 'flex', justifyContent: 'center', textAlign: 'left' }}>
             <PostCards
               title={post.title}
+              type={post.type}
               description={post.description}
+              username={post.username}
               postId={post._id}
             />
           </Grid>

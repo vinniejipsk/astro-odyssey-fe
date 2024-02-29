@@ -55,6 +55,20 @@ export async function getPost(postId) {
   }
 }
 
+export async function getPostsSearch(query) {
+  const searchURL = `${BASE_URL}/search?title=${encodeURIComponent(query)}`;
+  try {
+    const response = await fetch(searchURL);
+    if (!response.ok) {
+      throw new Error(`Network response was not ok: ${response.statusText}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("There was a problem with the fetch operation:", error);
+    throw error; // Rethrow to handle it in the calling component
+  }
+}
+
 export async function updatePost(postId, postData, userId) {
 
   const updateURL = `${BASE_URL}/${postId}/edit?userId=${userId}`;
