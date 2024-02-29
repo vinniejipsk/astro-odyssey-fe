@@ -4,7 +4,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import "./App.css";
 
 import { getUser, logoutUser } from "./service/users";
-import { getPost } from './service/posts'
+import { getPost } from './service/posts';
 
 import MainPage from "./pages/MainPage/MainPage";
 import ContentPage from "./pages/ContentPage/ContentPage";
@@ -24,9 +24,12 @@ import GuestMainBanner from "./components/Guest/GuestMainBanner/GuestMainBanner"
 import UserMainBanner from "./components/User/UserMainBanner/UserMainBanner";
 import GuestInfo from "./components/Guest/GuestInfo/GuestInfo";
 
+import SearchPage from "./pages/SearchPage/SearchPage";
 import EventPage from "./pages/EventPage/EventPage";
 
 import { getToken } from "./util/security";
+
+
 
 
 function App() {
@@ -60,6 +63,7 @@ function App() {
             <UserMainBanner />
             <Routes>
               <Route path="/" element={<MainPage />} />
+              <Route path="/search" element={<SearchPage />} />
               <Route
                 path="/user/:userId"
                 element={

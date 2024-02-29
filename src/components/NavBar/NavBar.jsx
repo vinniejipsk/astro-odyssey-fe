@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -7,19 +7,16 @@ import {
   Box,
 } from "@mui/material";
 import Button from '@mui/material/Button';
-
 import { Link } from "react-router-dom";
 
 import MenuDrawer from "./MenuDrawer";
-import SearchBar from "../Search/SearchBar/SearchBar"
+import SearchBar from "../Search/SearchBar/SearchBar";
 
 import { getToken } from "../../util/security";
 
 export default function NavBar({ handleLogOut }) {
   const token = getToken();
-  const userId = token
-    ? JSON.parse(atob(token.split(".")[1])).payload._id
-    : null; // Decode JWT to get userId
+  const userId = token ? JSON.parse(atob(token.split(".")[1])).payload._id : null;
 
   return (
     <>
@@ -37,31 +34,28 @@ export default function NavBar({ handleLogOut }) {
               AstroOdyssey
             </IconButton>
             <Box sx={{ flexGrow: 1 }}></Box>
-            {userId && (
-              // <SearchBar setWorldSearch={setWorldSearch} />
-              <SearchBar />
-            )}
+            {userId && <SearchBar />}
             {userId && (
               <Button 
-              sx={{ 
-                  display: "flex", 
-                  alignItems: "center",
-                  border: '1px solid white', // Add border, specify color as needed
-                  borderRadius: '10px', // Adjust for desired curvature
-                  padding: '4.5px 10px', // Add some padding inside the border
-              }}
-              >
-              <Link
-                to={`/user/${userId}`}
-                style={{
-                textDecoration: "none",
-                color: "inherit",
+                sx={{ 
+                    display: "flex", 
+                    alignItems: "center",
+                    border: '1px solid white',
+                    borderRadius: '10px',
+                    padding: '4.5px 10px',
                 }}
               >
-                <Typography sx={{ fontSize: '16px', color: 'white' }} color="inherit" component="div" >
-                  User
-                </Typography>
-              </Link>
+                <Link
+                  to={`/user/${userId}`}
+                  style={{
+                    textDecoration: "none",
+                    color: "inherit",
+                  }}
+                >
+                  <Typography sx={{ fontSize: '16px', color: 'white' }} color="inherit" component="div" >
+                    User
+                  </Typography>
+                </Link>
               </Button>
             )}
             <MenuDrawer userId={userId} handleLogOut={handleLogOut} />
