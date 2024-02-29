@@ -24,19 +24,6 @@ import { fetchUserData } from "../../../service/users";
 import { submitPost } from "../../../service/posts";
 
 export default function PostFormCreate({ userId, userData, setUserData }) {
-  const [postForm, setPostForm] = useState({
-    userId: userId, 
-    title: "",
-    description: "",
-    type: "", 
-    dateTime: "",
-    locationObserve: "",
-    visibility: "", 
-    magnitude: "", 
-    media: "",
-    username: "",
-  });
-  // const [formErrors, setFormErrors] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -53,6 +40,24 @@ export default function PostFormCreate({ userId, userData, setUserData }) {
       fetchData();
     }
   }, [userId]);
+
+  const [postForm, setPostForm] = useState({
+    userId: userId, 
+    title: "",
+    description: "",
+    type: "", 
+    dateTime: "",
+    locationObserve: "",
+    visibility: "", 
+    magnitude: "", 
+    media: "",
+    username: "",
+  });
+
+  // const [formErrors, setFormErrors] = useState({});
+
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleInputChange = (eventOrValue, maybeValue) => {
     let name, value;
@@ -73,7 +78,11 @@ export default function PostFormCreate({ userId, userData, setUserData }) {
 
   async function handleSubmit(evt) {
     evt.preventDefault();
-
+    if (!postForm.title || !postForm.description) {
+      setErrorMessage("Please fill up the required details.");
+      setSuccessMessage("");
+      return;
+    }
     const formSubmission = { ...postForm, userId: postForm.userId, username: postForm.username };
     try {
       const response = await submitPost(formSubmission);
@@ -89,9 +98,12 @@ export default function PostFormCreate({ userId, userData, setUserData }) {
           media: "",
           username: "", 
         });
+        setSuccessMessage("Your post has been created!");
+        setErrorMessage("");
     } catch (e) {
-      console.error("Error submitting post", e);
-      alert("Error submitting post");
+      console.error("Error submitting post", error);
+      setErrorMessage("Error submitting post. Please try again.");
+      setSuccessMessage("");
     }
   }
 
@@ -260,6 +272,8 @@ export default function PostFormCreate({ userId, userData, setUserData }) {
             >
               Submit Post
             </Button>
+            {successMessage && <Typography color="lightgreen">{successMessage}</Typography>}
+            {errorMessage && <Typography color="red">{errorMessage}</Typography>}
             <input type="hidden" name="userId" value={postForm.userId} />
           </Box>
         </Box>
