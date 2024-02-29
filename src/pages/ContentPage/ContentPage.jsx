@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { Button, Grid, Typography } from '@mui/material';
+import { useParams } from 'react-router-dom';
+import { Grid } from '@mui/material';
+import { jwtDecode } from 'jwt-decode';
 
 import { getPost } from '../../api/posts';
+import { fetchPostsData, fetchUserData } from "../../service/users";
 
 import PostFormView from '../../components/Post/PostFormView/PostFormView';
 
-export default function ContentPage () {
+export default function ContentPage ({ userData, setUserData }) {
 
   const [post, setPost] = useState([]);
   const { postId } = useParams();
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,9 +24,29 @@ export default function ContentPage () {
     fetchData();
   }, [postId]);
 
-  const handleEditClick = () => {
-    navigate(`/posts/${postId}/edit`);
-  };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const fetchedPost = await getPost(postId);
+  //       if (fetchedPost) {
+  //         setPost(fetchedPost);
+  //       }
+
+  //       const token = localStorage.getItem('token');
+  //       if (token) {
+  //         const decoded = jwtDecode(token);
+  //         if (decoded._id) {
+  //           const userData = await fetchUserData(decoded._id);
+  //           setUserData(userData);
+  //         }
+  //       }
+  //     } catch (error) {
+  //       console.error('Error fetching data:', error);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, [postId, setUserData]);
 
   return (
     <>
@@ -35,12 +55,18 @@ export default function ContentPage () {
           <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center', textAlign: 'left' }}>
             <PostFormView
               title={post.title}
+              type={post.type}
+              postId={post._id}
+              dateTime={post.dateTime}
+              locationObserve={post.locationObserve}
+              visibility={post.visibility}
+              magnitude={post.magnitude}
               description={post.description}
-              postId={post._id} // Assuming the post object has an _id property
+              media={post.media}
+              // name={userData.name}
             />
           </Grid>
         )}
-        <Button onClick={handleEditClick}>Edit</Button>
       </Grid>
     </>
   );  
