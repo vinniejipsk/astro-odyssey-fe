@@ -15,7 +15,6 @@ export default function SearchPage() {
       try {
         if (query) {
           const fetchedPosts = await getPostsSearch(query);
-          console.log(fetchedPosts)
           if (fetchedPosts) {
             setPosts(fetchedPosts);
           } else {
@@ -35,11 +34,15 @@ export default function SearchPage() {
     <>
       <Grid container spacing={2} justifyContent="center">
         {posts.map((post, index) => (
-          <Grid item xs={12} key={index} style={{ display: 'flex', justifyContent: 'center', textAlign: 'left' }}>
+          <Grid 
+            item xs={12} key={index} 
+            style={{ display: 'flex', justifyContent: 'center', textAlign: 'left' }}
+          >
             <SearchItem
               title={post.title}
               description={post.description}
               postId={post._id}
+              username={post.username}
             />
           </Grid>
         ))}

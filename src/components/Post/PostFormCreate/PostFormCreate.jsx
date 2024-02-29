@@ -20,26 +20,62 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
-import { fetchUserData } from "../../../service/users";
+// import { fetchUserData } from "../../../service/users";
 import { submitPost } from "../../../service/posts";
 
-export default function PostFormCreate({ userId, userData, setUserData }) {
+import { getToken } from "../../../util/security";
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const user = await fetchUserData(userId);
-      setUserData(user);
-      setPostForm((prevState) => ({
-        ...prevState,
-        userId: userId, 
-        username: user.name, 
-      }));
-    };
+export default function PostFormCreate() {
+
+  // { userId, userData, setUserData }
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const user = await fetchUserData(userId);
+  //     setUserData(user);
+  //     setPostForm((prevState) => ({
+  //       ...prevState,
+  //       userId: userId, 
+  //       username: user.name, 
+  //     }));
+  //   };
   
-    if (userId) {
-      fetchData();
+  //   if (userId) {
+  //     fetchData();
+  //   }
+  // }, [userId]);
+
+  // useEffect(() => {
+  //   if (userId) {
+  //     fetchUserData(userId)
+  //       .then(user => {
+  //         setUserData(user);
+  //         setPostForm((prevState) => ({
+  //           ...prevState,
+  //           userId: userId,
+  //           username: user.name, // Assuming 'name' is a field in your user data
+  //         }));
+  //       })
+  //       .catch(error => {
+  //         console.error('Failed to fetch user data:', error);
+  //         // Optionally set an error state here to show an error message
+  //       });
+  //   }
+  // }, [userId]);
+
+  const [userId, setUserId] = useState("");
+  
+  useEffect(() => {
+    const token = getToken();
+    const payload = token ? JSON.parse(atob(token.split(".")[1])).payload : null;
+    if (payload && payload._id) {
+      setPostForm(prevForm => ({
+        ...prevForm,
+        userId: payload._id,
+        username: payload.user
+      }));
     }
-  }, [userId]);
+  }, []);
 
   const [postForm, setPostForm] = useState({
     userId: userId, 
@@ -53,9 +89,8 @@ export default function PostFormCreate({ userId, userData, setUserData }) {
     media: "",
     username: "",
   });
-
   // const [formErrors, setFormErrors] = useState({});
-
+  console.log(postForm)
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
