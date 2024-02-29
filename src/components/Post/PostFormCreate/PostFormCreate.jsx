@@ -20,13 +20,12 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
+import { fetchUserData } from "../../../service/users";
 import { submitPost } from "../../../service/posts";
-import { getUser } from "../../../service/users";
-import { getToken } from "../../../util/security";
 
-export default function PostFormCreate() {
+export default function PostFormCreate({ userId, userData, setUserData }) {
   const [postForm, setPostForm] = useState({
-    userId: "",
+    userId: userId, 
     title: "",
     description: "",
     type: "", 
@@ -35,15 +34,25 @@ export default function PostFormCreate() {
     visibility: "", 
     magnitude: "", 
     media: "",
+    username: userData.name
   });
   // const [formErrors, setFormErrors] = useState({});
 
   useEffect(() => {
-    const user = getUser();
-    if (user) {
-      setPostForm((prevState) => ({ ...prevState, userId: user }));
+    const fetchData = async () => {
+      const user = await fetchUserData(userId);
+      setUserData(user);
+      setPostForm((prevState) => ({
+        ...prevState,
+        userId: userId, 
+        username: user.name, 
+      }));
+    };
+  
+    if (userId) {
+      fetchData();
     }
-  }, []);
+  }, [userId]);
 
   const handleInputChange = (eventOrValue, maybeValue) => {
     let name, value;
@@ -65,17 +74,9 @@ export default function PostFormCreate() {
   async function handleSubmit(evt) {
     evt.preventDefault();
 
-    const token = getToken();
-    const payload = token ? JSON.parse(atob(token.split(".")[1])).payload : null;
-  
-    if (payload && payload._id) {
-      const updatedPostForm = { ...postForm, userId: payload._id };
-
-      // if (!validateForm()) {
-      //   return;
-      // }
-      try {
-        const response = await submitPost(updatedPostForm);
+    const formSubmission = { ...postForm, userId: userId, username: userData.name };
+    try {
+      const response = await submitPost(formSubmission);
         setPostForm({
           userId: "",
           title: "",
@@ -86,14 +87,11 @@ export default function PostFormCreate() {
           visibility: "",
           magnitude: "",
           media: "",
+          username: "", 
         });
-        // setFormErrors({});
-      } catch (e) {
-        console.error("Error submitting post", e);
-        alert("Error submitting post");
-      }
-    } else {
-      alert("Please log in to submit a post");
+    } catch (e) {
+      console.error("Error submitting post", e);
+      alert("Error submitting post");
     }
   }
 
@@ -109,10 +107,10 @@ export default function PostFormCreate() {
             borderRadius:'0.5rem',
             padding: "1rem",
             paddingTop: "3rem",
-            maxWidth: "75%", // Set the maxWidth of the Box to 50%
-            width: "100%", // Ensure the Box tries to fill its maxWidth
-            margin: "auto", // This centers the Box horizontally in its parent
-            boxSizing: "border-box", // Ensures padding is included in the width calculation
+            maxWidth: "75%", 
+            width: "100%",
+            margin: "auto", 
+            boxSizing: "border-box",
             backgroundColor: 'rgba(0,0,0,0.5)',
             marginBottom: "5rem",
           }}

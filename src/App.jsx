@@ -67,8 +67,8 @@ function App() {
                 }
               />
               <Route path="/schedule" element={<EventPage/>} />
-              <Route path="/create" element={<PostFormCreate />} />
-              <Route path="/posts/:postId" element={<ContentPage />} />
+              <Route path="/create" element={<PostFormCreate userId={userId} userData={userData} setUserData={setUserData} />} />
+              <Route path="/posts/:postId" element={<ContentPage userData={userData} setUserData={setUserData} />} />
               <Route
                 path="/posts/:postId/edit"
                 element={<PostFormUpdate />}
