@@ -34,7 +34,7 @@ export default function PostFormCreate({ userId, userData, setUserData }) {
     visibility: "", 
     magnitude: "", 
     media: "",
-    username: userData.name
+    username: "",
   });
   // const [formErrors, setFormErrors] = useState({});
 
@@ -74,7 +74,7 @@ export default function PostFormCreate({ userId, userData, setUserData }) {
   async function handleSubmit(evt) {
     evt.preventDefault();
 
-    const formSubmission = { ...postForm, userId: userId, username: userData.name };
+    const formSubmission = { ...postForm, userId: postForm.userId, username: postForm.username };
     try {
       const response = await submitPost(formSubmission);
         setPostForm({
