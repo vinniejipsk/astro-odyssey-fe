@@ -96,3 +96,5 @@ The filters that help users to find the posts they want! Also the particle.js ma
 ![image](https://github.com/vinniejipsk/astro-odyssey-fe/assets/141219700/febb7b72-1d87-4a4b-9552-6ff0de3a092e)
 
 Thank you everyone!
+
+~ Q&A ~
