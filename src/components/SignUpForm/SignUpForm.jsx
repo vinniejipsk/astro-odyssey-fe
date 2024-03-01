@@ -14,6 +14,7 @@ import { hashData } from "../../util/security";
 export default function SignUpForm() {
   const [formState, setFormState] = useState({});
   const [signUpStatus, setSignUpStatus] = useState();
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   function handleChange(evt) {
     var currForm = formState;
@@ -43,8 +44,12 @@ export default function SignUpForm() {
       delete formData.confirm;
       const user = await signUp(formData);
       setSignUpStatus(user);
+      setSignUpStatus("User Account Created");
+      setShowSuccessMessage(true);
+      setTimeout(() => setShowSuccessMessage(false), 3000); 
     } catch (e) {
       console.log(e);
+      setSignUpStatus("Failed to create account");
     }
   }
 
@@ -193,6 +198,11 @@ export default function SignUpForm() {
             >
               Sign Up
             </Button>
+            {showSuccessMessage && ( // Conditionally render the success message
+            <Typography variant="body1" style={{ color: 'lightgreen', marginTop:'2px', marginBottom: "10px" }}>
+              {signUpStatus}
+            </Typography>
+          )}
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <RouterLink to="/login" style={{ textDecoration: 'none', color: 'lightblue' }}>
