@@ -16,7 +16,7 @@ export default function PostFormView(props) {
 
   const handleEditClick = () => navigate(`/posts/${postId}/edit`);
 
-  const imagePath = `/src/assets/images/astro/${media}.jpg`;
+  const imagePath = `/images/astro/${media}.jpg`;
 
   const [copied, setCopied] = useState(false);
   const location = useLocation();
