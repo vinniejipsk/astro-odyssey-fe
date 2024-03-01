@@ -71,7 +71,9 @@ The filters that help users to find the posts they want! Also the particle.js ma
 
 1. Implementing particles.js into React. (Bypassed the useEffect method)
 2. Background responsive design.
-3. Making the search to work, filtering to work.
+3. Some FE Ui are hard to design.
+4. Some BE codes are hard to debug for days.
+5. Making the search to work, filtering to work.
 
 # What to expect in the future!
 
