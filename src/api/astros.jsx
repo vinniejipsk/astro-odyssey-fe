@@ -1,7 +1,7 @@
 // // REAL URL
-// const BASE_URL =
+const BASE_URL = "https://astro-odyssey-be.onrender.com/astros";
 // TEST URL
-const BASE_URL = "http://localhost:3000/astros";
+// const BASE_URL = "http://localhost:3000/astros";
 
 // export async function getAstros() {
 //   try {
