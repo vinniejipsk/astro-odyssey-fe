@@ -56,7 +56,7 @@ export default function SearchPage() {
             <Button 
               variant="contained" 
               onClick={() => handleFilterClick(filterType.value)}
-              sx={{ backgroundColor: "rgba(100,100,100,0.75)" }}
+              sx={{ backgroundColor: "rgba(22,38,62,0.75)" }}
               >
               {filterType.label}
             </Button>
