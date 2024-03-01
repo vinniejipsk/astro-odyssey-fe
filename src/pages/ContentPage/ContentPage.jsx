@@ -29,6 +29,7 @@ export default function ContentPage ({ userData, setUserData }) {
         {post && (
           <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center', textAlign: 'left' }}>
             <PostFormView
+              userId={post.userId}
               title={post.title}
               type={post.type}
               postId={post._id}
