@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 
 import "./App.css";
 
@@ -34,6 +34,8 @@ function App() {
   const [user, setUser] = useState(getUser());
   const [userId, setUserId] = useState("");
   const [userData, setUserData] = useState({});
+
+  const navigate = useNavigate();
   
   // retrieve user id when logged in
   useEffect(() => {
@@ -49,6 +51,7 @@ function App() {
   function handleLogOut() {
     logoutUser();
     setUser(null);
+    navigate(`/`);
   }
   const location = useLocation();
   const [key, setKey] = useState(0);
