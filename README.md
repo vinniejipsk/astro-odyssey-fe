@@ -16,7 +16,7 @@ https://astro-odyssey-fe.onrender.com/
 # User Stories
 https://trello.com/b/qby9HR2R/astroodyssey
 
-First the explorers get to sign up for an account or sign in with an account!
+First the explorers get to sign up or sign in with an account!
 
 ![image](https://github.com/vinniejipsk/astro-odyssey-fe/assets/141219700/220497cc-a431-4372-b561-3528581e77fa)
 ![image](https://github.com/vinniejipsk/astro-odyssey-fe/assets/141219700/c9d10df5-c35d-4f23-94ec-d1b75507cf5c)
@@ -48,12 +48,12 @@ You can click the menu and see what's available!
 
 You can search by queries or with the filters!
 
-![image](https://github.com/vinniejipsk/astro-odyssey-fe/assets/141219700/6c1daa9c-7d96-49d9-a3e8-1f8b631d324c)
+![image](https://github.com/vinniejipsk/astro-odyssey-fe/assets/141219700/a8a00a2e-7358-456f-b636-e8e1efad83b4)
 
 That is all for now!
 
 # Technologies Used 
-MERN Stack: React, Material Ui, CSS, MongoDB, particle.js (Background Plate), jsonwebtoken.
+MERN Stack: React, CSS, MongoDB, Material Ui, particle.js (Background Plate), jsonwebtoken.
 
 # Wireframes
 https://www.figma.com/file/ymMM7a2sxGSnUGpdFMuVqN/AstroOdyssey?type=design&node-id=0%3A1&mode=design&t=FJiG6eLkWVGvVCQR-1
@@ -67,7 +67,7 @@ https://miro.com/app/board/uXjVNuVKlRA=/?share_link_id=966685601213
 2. Background responsive design.
 3. Making the search to work, filtering to work.
 
-# Up coming updates!
+# What to expect in the future!
 
 1. Using Google Client API to let users to upload their images or videos! Display it with awesomeness!
    
