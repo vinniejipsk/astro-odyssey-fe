@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { getPostsSearch } from '../../api/posts'; 
-import { Grid } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 import { useSearchParams } from 'react-router-dom';
 import SearchItem from '../../components/Search/SearchItem/SearchItem';
 
@@ -33,19 +33,34 @@ export default function SearchPage() {
   return (
     <>
       <Grid container spacing={2} justifyContent="center">
-        {posts.map((post, index) => (
-          <Grid 
-            item xs={12} key={index} 
-            style={{ display: 'flex', justifyContent: 'center', textAlign: 'left' }}
-          >
-            <SearchItem
-              title={post.title}
-              description={post.description}
-              postId={post._id}
-              username={post.username}
-            />
-          </Grid>
-        ))}
+        {posts.length > 0 ? (
+          posts.map((post, index) => (
+            <Grid 
+              item xs={12} key={index} 
+              style={{ display: 'flex', justifyContent: 'center', textAlign: 'left' }}
+            >
+              <SearchItem
+                title={post.title}
+                description={post.description}
+                postId={post._id}
+                username={post.username}
+              />
+            </Grid>
+          ))
+        ) : (
+          <Typography 
+            variant="h6" 
+            sx={{ 
+              color: 'white', 
+              textAlign: 'center', 
+              width: '100%',
+              fontSize: "20px",
+              backgroundColor:'rgba(255,255,255,0.15)',
+              paddingBlock:'1rem',
+            }}>
+            "No Search Results"
+          </Typography>
+        )}
       </Grid>
     </>
   );  
