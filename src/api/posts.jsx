@@ -1,124 +1,134 @@
-const modelPosts = require("../models/posts");
-const modelUsers = require("../models/users");
+// // REAL URL
+const BASE_URL = "https://astro-odyssey-be.onrender.com/posts";
+// TEST URL
+// const BASE_URL = "http://localhost:3000/posts";
 
-module.exports = {
-  createPost,
-  getPosts,
-  searchPosts,
-  getPost,
-  updatePost,
-  deletePost,
-};
+export async function createPost(postData) {
+  const createURL = BASE_URL + '/create';
+  const token = localStorage.getItem('token'); // Get the stored JWT token
 
-async function createPost(req, res) {
   try {
-    const postData = req.body;
+    const res = await fetch(createURL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}` // Include the JWT token in the request
+      },
+      body: JSON.stringify(postData),
+    });
 
-    // Validate userId
-    const user = await modelUsers.getUser(postData.userId);
-    if (!user) {
-      return res.status(400).json({ errorMsg: "Invalid user ID" });
+    if (res.ok) {
+      return await res.json();
+    } else {
+      const errorData = await res.text();
+      throw new Error(errorData);
     }
-
-    const post = await modelPosts.createPost(postData);
-    res.status(201).json(post); // Return the created post
-  } catch (err) {
-    res.status(500).json({ errorMsg: err.message });
+  } catch (error) {
+    console.error("Error creating post: ", error);
+    throw error;
   }
 }
 
-async function getPosts(req, res) {
+export async function getPosts() {
   try {
-    const posts = await modelPosts.getPosts();
-    res.status(200).json(posts);
-  } catch (err) {
-    res.status(500).json({ errorMsg: err.message });
+    const response = await fetch(BASE_URL);
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("There was a problem with the fetch operation:", error);
   }
 }
 
-async function searchPosts(req, res) {
+export async function getPost(postId) {
+
+  const postURL = `${BASE_URL}/${postId}`;
   try {
-    // Check if there's a 'title' query parameter
-    const query = {};
-    if (req.query.title) {
-      // Add a filter for title using a case-insensitive regex search
-      query.title = { $regex: req.query.title, $options: 'i' };
+    const response = await fetch(postURL);
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
     }
-    if (req.query.type) {
-      query.type = req.query.type; // Direct match for type
-    }
-
-    // Pass the query object to your model's find method
-    const posts = await modelPosts.getSearchPosts(query); // Ensure your model's getPosts method can accept a query object
-
-    res.status(200).json(posts);
-  } catch (err) {
-    res.status(500).json({ errorMsg: err.message });
+    return await response.json();
+  } catch (error) {
+    console.error("There was a problem with the fetch operation:", error);
   }
 }
 
-async function getPost(req, res) {
+export async function getPostsSearch({ query, type }) {
+  let searchURL = `${BASE_URL}/search?`;
+  const params = new URLSearchParams();
+
+  // Append 'title' only if 'query' is not empty
+  if (query) {
+    params.append('title', query);
+  }
+
+  // Append 'type' only if 'type' is not empty
+  if (type) {
+    params.append('type', type);
+  }
+
+  searchURL += params.toString();
+
   try {
-    const postId = req.params.postId;
-    const post = await modelPosts.getPost(postId);
-    if (!post) {
-      return res.status(404).json({ message: "Post not found" });
+    const response = await fetch(searchURL);
+    if (!response.ok) {
+      throw new Error(`Network response was not ok: ${response.statusText}`);
     }
-    res.status(200).json(post);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
+    return await response.json();
+  } catch (error) {
+    console.error("There was a problem with the fetch operation:", error);
+    throw error; // Rethrow to handle it in the calling component
   }
 }
 
-async function updatePost(req, res) {
+
+export async function updatePost(postId, postData, userId) {
+
+  const updateURL = `${BASE_URL}/${postId}/edit?userId=${userId}`;
+  const token = localStorage.getItem('token'); 
+
   try {
-    const postId = req.params.postId;
-    const updateData = req.body;
-    const userId = req.user._id;
+    const res = await fetch(updateURL, {
+      method: "PUT", // or "PATCH" if you are using PATCH for partial updates
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}` // Include the JWT token in the request
+      },
+      body: JSON.stringify(postData),
+    });
 
-    const post = await modelPosts.getPost(postId);
-    if (!post) {
-      return res.status(404).json({ message: "Post not found" });
+    if (res.ok) {
+      return await res.json();
+    } else {
+      const errorData = await res.text();
+      throw new Error(errorData);
     }
-
-    if (post.userId.toString() !== userId && !req.user.is_admin) {
-      return res
-        .status(403)
-        .json({
-          message: "Forbidden: User not authorized to update this post",
-        });
-    }
-
-    const updatedPost = await modelPosts.updatePost(postId, updateData);
-    res.status(200).json(updatedPost);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ errorMsg: err.message });
+  } catch (error) {
+    console.error("Error updating post: ", error);
+    throw error;
   }
 }
 
-async function deletePost(req, res) {
+export async function deletePost(postId, userId) {
+  const deleteURL = `${BASE_URL}/${postId}?userId=${userId}`;
+  const token = localStorage.getItem('token'); 
+
   try {
-    const postId = req.params.postId;
-    const userId = req.user._id;
+    const response = await fetch(deleteURL, {
+      method: 'DELETE',
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
+    });
 
-    const post = await modelPosts.getPost(postId);
-    if (!post) {
-      return res.status(404).json({ message: "Post not found" });
+    if (!response.ok) {
+      throw new Error('Failed to delete post');
     }
-
-    if (post.userId.toString() !== userId && !req.user.is_admin) {
-      return res
-        .status(403)
-        .json({
-          message: "Forbidden: User not authorized to delete this post",
-        });
-    }
-
-    await modelPosts.deletePost(postId);
-    res.status(200).json({ message: "Post deleted successfully" });
-  } catch (err) {
-    console.error("Error deleting post:", err);
-    res.status(500).json({ errorMsg: err.message });
+    return await response.json();
+  } catch (error) {
+    console.error('Error deleting post:', error);
+    throw error;
   }
 }
