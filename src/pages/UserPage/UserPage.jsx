@@ -18,8 +18,10 @@ function UserPage({ userData, setUserData }) {
     fetchData();
   }, []);
 
-  const BASE_URL = "http://localhost:3000/users";
-//   const BASE_URL = "https://gamebuddy-mnj1.onrender.com/users";
+  // REAL URL
+  const BASE_URL = "https://astro-odyssey-be.onrender.com/users";
+  // TEST URL
+  // const BASE_URL = "http://localhost:3000/users";
 
   return (
     <>

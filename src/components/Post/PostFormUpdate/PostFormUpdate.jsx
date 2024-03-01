@@ -43,10 +43,11 @@ export default function PostFormUpdate() {
   const navigate = useNavigate();
   const userId = postData.userId;
 
+
   // REAL URL
-  // const BASE_URL = "https://gamebuddy-mnj1.onrender.com/posts";
-  // TEST URL
-  const BASE_URL = "http://localhost:3000/posts";
+  const BASE_URL = "https://astro-odyssey-be.onrender.com/posts";
+  // // TEST URL
+  // const BASE_URL = "http://localhost:3000/posts";
 
   useEffect(() => {
     const fetchPost = async () => {

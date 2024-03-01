@@ -1,4 +1,7 @@
-const BASE_URL = "http://localhost:3000/users";
+// REAL URL
+const BASE_URL = "https://astro-odyssey-be.onrender.com/users";
+// TEST URL
+// const BASE_URL = "http://localhost:3000/users";
 
 export async function signUp(userData) {
   // Fetch uses an options object as a second arg to make requests

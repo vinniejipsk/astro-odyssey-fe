@@ -1,7 +1,7 @@
 // // REAL URL
-// const BASE_URL =
+const BASE_URL = "https://astro-odyssey-be.onrender.com/posts";
 // TEST URL
-const BASE_URL = "http://localhost:3000/posts";
+// const BASE_URL = "http://localhost:3000/posts";
 
 export async function createPost(postData) {
   const createURL = BASE_URL + '/create';
