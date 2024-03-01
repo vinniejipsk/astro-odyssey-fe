@@ -61,6 +61,12 @@ https://www.figma.com/file/ymMM7a2sxGSnUGpdFMuVqN/AstroOdyssey?type=design&node-
 # ERD
 https://miro.com/app/board/uXjVNuVKlRA=/?share_link_id=966685601213
 
+# Favourite features?
+
+The filters that help users to find the posts they want! Also the particle.js makes the website awesome!
+
+![image](https://github.com/vinniejipsk/astro-odyssey-fe/assets/141219700/958c100f-bc41-41d9-a585-c645b56c9d19)
+
 # Challenges
 
 1. Implementing particles.js into React. (Bypassed the useEffect method)
