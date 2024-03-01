@@ -1,37 +1,68 @@
 import React, { useEffect, useState } from 'react';
 
 import { getPostsSearch } from '../../api/posts'; 
-import { Grid, Typography } from '@mui/material';
-import { useSearchParams } from 'react-router-dom';
+import { Grid, Typography, Button } from '@mui/material';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import SearchItem from '../../components/Search/SearchItem/SearchItem';
 
+const filterTypes = [
+  { label: "Meteor Showers", value: "Meteor Shower" },
+  { label: "Solar Eclipses", value: "Solar Eclipse" },
+  { label: "Planetary Transits", value: "Planetary Transit" },
+  { label: "Lunar Eclipses", value: "Lunar Eclipse" },
+  { label: "Oppositions", value: "Opposition" },
+  { label: "Conjunctions", value: "Conjunction" },
+  { label: "Guide", value: "Guide" },
+  { label: "Discussion", value: "Discussion" },
+];
+
 export default function SearchPage() {
-  const [searchParams] = useSearchParams();
-  const query = searchParams.get('query'); // Get the query from URL
+  const [searchParams, setSearchParams] = useSearchParams();
+  const query = searchParams.get('query'); // Get the search query from URL
+  const type = searchParams.get('type'); // Get the type from URL
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     const fetchSearchResults = async () => {
       try {
-        if (query) {
-          const fetchedPosts = await getPostsSearch(query);
-          if (fetchedPosts) {
-            setPosts(fetchedPosts);
-          } else {
-            // Handle case where no posts are returned
-            setPosts([]);
-          }
+        // Adjusted to pass both query and type to the API call
+        const fetchedPosts = await getPostsSearch({ query, type });
+        if (fetchedPosts) {
+          setPosts(fetchedPosts);
+        } else {
+          setPosts([]);
         }
       } catch (error) {
         console.error("Failed to fetch search results:", error);
-        // Handle error state as needed
       }
     };
     fetchSearchResults();
-  }, [query]);
+  }, [query, type]);
+
+  const handleFilterClick = (filterValue) => {
+    // Keep the existing query and update the type in the search params
+    setSearchParams({ query: query || '', type: filterValue });
+  };
 
   return (
     <>
+      <Grid 
+        container spacing={2} 
+        justifyContent="center"
+        sx={{ marginBottom: "2rem" }}
+        >
+        {filterTypes.map((filterType) => (
+          <Grid item key={filterType.value}>
+            <Button 
+              variant="contained" 
+              onClick={() => handleFilterClick(filterType.value)}
+              sx={{ backgroundColor: "rgba(100,100,100,0.75)" }}
+              >
+              {filterType.label}
+            </Button>
+          </Grid>
+        ))}
+      </Grid>
       <Grid container spacing={2} justifyContent="center">
         {posts.length > 0 ? (
           posts.map((post, index) => (
@@ -57,8 +88,9 @@ export default function SearchPage() {
               fontSize: "20px",
               backgroundColor:'rgba(255,255,255,0.15)',
               paddingBlock:'1rem',
+              marginTop:"1rem",
             }}>
-            "No Search Results"
+            No Search Results
           </Typography>
         )}
       </Grid>
