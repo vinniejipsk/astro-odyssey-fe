@@ -17,7 +17,8 @@ https://astro-odyssey-fe.onrender.com/
 https://trello.com/b/qby9HR2R/astroodyssey
 
 First the explorers get to sign up for an account or sign in with an account!
-![image](https://github.com/vinniejipsk/astro-odyssey-fe/assets/141219700/23f2feee-9bb3-4e57-9ea8-44cb4020d9ef)
+![image](https://github.com/vinniejipsk/astro-odyssey-fe/assets/141219700/220497cc-a431-4372-b561-3528581e77fa)
+
 ![image](https://github.com/vinniejipsk/astro-odyssey-fe/assets/141219700/c9d10df5-c35d-4f23-94ec-d1b75507cf5c)
 ![image](https://github.com/vinniejipsk/astro-odyssey-fe/assets/141219700/9e0117f2-0940-4dbc-88ca-677f0bee03d6)
 
@@ -34,9 +35,11 @@ They are able to edit or delete a post.
 ![image](https://github.com/vinniejipsk/astro-odyssey-fe/assets/141219700/50179f14-be29-419b-b366-831d564b8335)
 
 All explorers are able to see and edit their details!
+
 ![image](https://github.com/vinniejipsk/astro-odyssey-fe/assets/141219700/d6bee295-465b-445f-a04b-36ee95df9cf9)
 
 You can click the menu and see what's available!
+
 ![image](https://github.com/vinniejipsk/astro-odyssey-fe/assets/141219700/b1d8b722-48d3-433e-ab04-cb2bedef17e4)
 
 You can search by queries or with the filters!
